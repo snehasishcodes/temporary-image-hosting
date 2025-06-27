@@ -2,92 +2,220 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gurt.party</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
-		* {
-			margin: 0;
-			padding: 15px;
-			box-sizing: border-box;
-			font-family: "Source Code Pro", monospace;
-			font-optical-sizing: auto;
-			font-weight: 400;
-			font-style: normal;
-			font-size: 14px;
-		}
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Source Code Pro", monospace;
+        }
 
-		body {
-			white-space: pre;
-		}
+        body {
+            padding: 2rem;
+            line-height: 1.6;
+        }
 
-		details {
-			margin: -25px;
-		}
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin-top: 1.5rem;
+            font-weight: 500;
+        }
 
-		details>p {
-			white-space: pre-line;
-		}
-	</style>
-	<title>gurt.party</title>
+        blockquote {
+            padding-left: 1rem;
+            border-left: 4px solid #ccc;
+            color: #666;
+        }
+
+        table {
+            width: fit-content;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid rgba(0, 0, 0, 0.15);
+            margin: 1rem 0;
+        }
+
+        pre {
+            padding: 1rem;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.06);
+            width: fit-content;
+            overflow-x: auto;
+            white-space: pre;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        code {
+            font-family: monospace;
+        }
+    </style>
 </head>
 
-<body>gurt.party
------------
-temporary image hosting
-free and <a href="https://github.com/snehasishcodes/gurt.party">open source</a>
+<body>
+    <script id="md" type="text/markdown">
+# gurt.party
+temporary image hosting service
 
-to upload directly from your browser, use the <a href="/upload">/upload</a>.
+[sponsor](https://buymeacoffee.com/snehasish) | [github](https://github.com/snehasishcodes) | [instagram](https://instagram.com/snehasish) | [twitter](https://twitter.com/snehasishcodes)
 
----------------------------------------------------
+[discord support server](https://discord.gg/K6k6ebkJkx)
 
+---
 
-POST /upload
-• upload a temporary image
+## upload an image
 
-request headers
-╔══════════════╤═════════════════════╗
-║ Content-Type │ multipart/form-data ║
-╚══════════════╧═════════════════════╝
+to upload directly from the browser, use [/upload](https://gurt.party/upload).
 
-request body
-╔════════════╤════════╤══════════╤═════════╗
-║ NAME       │ TYPE   │ REQUIRED │ LIMIT   ║
-╟────────────┼────────┼──────────┼─────────╢
-║ file       │ file   │ true     │ 5 MB    ║
-╟────────────┼────────┼──────────┼─────────╢
-║ expires_in │ string │ true     │ 7 days  ║
-╟────────────┼────────┼──────────┼─────────╢
-║ title      │ string │ false    │ 100     ║
-╚════════════╧════════╧══════════╧═════════╝
+**POST `/upload`**
 
-* note: `expires_in` valid formats:
-- 1 hour, 3d, 2d 12h 5m, 8h 30m, etc.
-- timestamps (string)
+Request Headers
+```
+Content-Type: multipart/form-data
+```
 
-<details><summary>terms of service</summary><p>1. no illegal content
-		2. no adult or nsfw content
-		3. no spam or phishing content
-		4. no content that violates any laws or regulations
-		5. no content that infringes on the rights of others
-		6. no content that is harmful or malicious</p>
-</details>
-<details><summary>privacy policy</summary><p>1. all images are publicly accessible only via a unique URL
-		2. images are stored for a maximum of 7 days
-		3. images are not indexed by search engines
-		4. images are not shared with third parties
-		5. images are not used for any other purpose
-		6. images are deleted after the expiration date
-		7. we do not collect any personal information
-		8. we do not use cookies or tracking technologies
-		9. we do not log any user activity</p>
-</details>
+Request Body
+```
+file: <file> (required, max size: 5MB)
+expires_in: <string> (required, max: 7 days, example: "7d" for 7 days, "1h" for 1 hour, etc.)
+title: <string> (optional, max length: 100 characters)
+```
 
-by <a href="https://snehasish.xyz" target="_blank">snehasish</a>
-mail@snehasish.xyz / discord: @snehasish / instagram: @snehasish
-x: @snehasishcodes / github: @snehasishcodes
-sponsor me: <a href="https://buymeacoffee.com/snehasish">buymeacoffee.com/snehasish</a> / upi: snehasishlol@fam
+Example Response
+```
+{"id":"rdmNtg5C0T9NJejdRteaJT","url":"https://gurt.party/rdmNtg5C0T9NJejdRteaJT","expires_at":"2025-06-27T12:45:09.800Z"}
+```
+
+## features
+
+- free and open source
+- self host for free
+- image hosting for upto 7 days
+- unlimited uploads
+- no API key or auth required
+
+## how it works
+
+- [sanity.io](https://www.sanity.io/) provides 100GB asset storage on free tier
+- [sanity.io](https://www.sanity.io/)'s free project tier for image+metadata storage
+- [upstash+redis](https://upstash.com/) for rate limits & stats storage
+- [cron-job.org](https://cron-job.org/en/) for deleting expired images
+
+## rate limits
+
+- 1 uploads per minute
+- 10 uploads per hour
+- 100 uploads per day
+- 200 uploads per week
+
+*self-host if you hate being limited. its free.
+
+## self hosting guide
+
+### 1. clone the repo
+[snehasishcodes/temporary-image-hosting](https://github.com/snehasishcodes/temporary-image-hosting)
+
+```
+git clone https://github.com/snehasishcodes/temporary-image-hosting
+cd temporary-image-hosting
+```
+
+### 2. install dependencies
+```
+cd temporary-image-hosting
+pnpm install
+```
+
+### 3. create a sanity.io project
+login to [sanity.io](https://www.sanity.io/manage) and create a new project. you can use the default template. after creating the project, you will get a `projectId` and `dataset` name.
+
+then go to the API tab within your project and create a new token with `write` or Editor permissions. copy the token and paste it in the `.env` file as `SANITY_WRITE_TOKEN`.
+
+### 4. use sanity CLI to deploy the schema
+```
+pnpm exec sanity deploy
+```
+
+### 5. create a redis database on upstash
+go to [upstash.com](https://upstash.com/) and create a new redis database. you will get a `UPSTASH_REDIS_HOST`, `UPSTASH_REDIS_PASSWORD`, and `UPSTASH_REDIS_PORT`. copy these values and paste them in the `.env` file.
+
+### 6. create a .env file
+this will contain sanity client secrets and upstash redis secrets and secret auth token for /cron endpoint protection.
+
+create a `.env` file in the root of the project and paste this:
+```
+SANITY_WRITE_TOKEN="--sanity-write-token-here--"
+SECRET_AUTH_TOKEN="--random-secret-auth-token--"
+
+UPSTASH_REDIS_HOST="upstash-redis-host-example-without-protocol.upstash.io"
+UPSTASH_REDIS_PASSWORD="--upstash-redis-password-here--"
+UPSTASH_REDIS_PORT="6379"
+```
+
+useful links:
+- [sanity.io](https://www.sanity.io/docs/http-authentication) for generating `SANITY_WRITE_TOKEN`
+- [upstash.com](https://upstash.com/docs/redis/quickstart) for creating a redis database and getting `UPSTASH_REDIS_HOST`, `UPSTASH_REDIS_PASSWORD`, `UPSTASH_REDIS_PORT`
+
+### 7. run development server
+```
+pnpm run dev
+```
+
+### 8. deploy to production
+you can use any hosting service that supports node.js, like [railway](https://railway.app/), [fly.io](https://fly.io/), etc. there is also a `vercel.json` file which allows you to deploy to [vercel](https://vercel.com).
+
+build command
+```
+pnpm run build
+```
+
+start command
+```
+pnpm run start
+```
+
+### 9. cron job for deleting expired images
+you can use [cron-job.org](https://cron-job.org/en/) to send a POST request to the `/cron` endpoint every 5 minutes with the PRIVATE `SECRET_AUTH_TOKEN` value as Authorization Header to delete expired images. it's free.
+
+---
+
+## issues
+if you find any issues, please create a new issue here: [snehasishcodes/temporary-image-hosting/issues](https://github.com/snehasishcodes/temporary-image-hosting/issues)
+
+  </script>
+
+    <script>
+        const rawMarkdown = document.getElementById("md").textContent;
+        document.body.innerHTML = marked.parse(rawMarkdown);
+    </script>
 </body>
 
 </html>

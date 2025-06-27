@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+		* {
+			margin: 0;
+			padding: 15px;
+			box-sizing: border-box;
+			font-family: "Source Code Pro", monospace;
+			font-optical-sizing: auto;
+			font-weight: 400;
+			font-style: normal;
+			font-size: 14px;
+		}
+
+		body {
+			white-space: pre;
+		}
+
+		details {
+			margin: -25px;
+		}
+
+		details>p {
+			white-space: pre-line;
+		}
+	</style>
+	<title>gurt.party</title>
+</head>
+
+<body>gurt.party
+-----------
+temporary image hosting
+free and <a href="https://github.com/snehasishcodes/gurt.party">open source</a>
+
+to upload directly from your browser, use the <a href="/upload">/upload</a>.
+
+---------------------------------------------------
+
+
+POST /upload
+• upload a temporary image
+
+request headers
+╔══════════════╤═════════════════════╗
+║ Content-Type │ multipart/form-data ║
+╚══════════════╧═════════════════════╝
+
+request body
+╔════════════╤════════╤══════════╤═════════╗
+║ NAME       │ TYPE   │ REQUIRED │ LIMIT   ║
+╟────────────┼────────┼──────────┼─────────╢
+║ file       │ file   │ true     │ 5 MB    ║
+╟────────────┼────────┼──────────┼─────────╢
+║ expires_in │ string │ true     │ 7 days  ║
+╟────────────┼────────┼──────────┼─────────╢
+║ title      │ string │ false    │ 100     ║
+╚════════════╧════════╧══════════╧═════════╝
+
+* note: `expires_in` valid formats:
+- 1 hour, 3d, 2d 12h 5m, 8h 30m, etc.
+- timestamps (string)
+
+<details><summary>terms of service</summary><p>1. no illegal content
+		2. no adult or nsfw content
+		3. no spam or phishing content
+		4. no content that violates any laws or regulations
+		5. no content that infringes on the rights of others
+		6. no content that is harmful or malicious</p>
+</details>
+<details><summary>privacy policy</summary><p>1. all images are publicly accessible only via a unique URL
+		2. images are stored for a maximum of 7 days
+		3. images are not indexed by search engines
+		4. images are not shared with third parties
+		5. images are not used for any other purpose
+		6. images are deleted after the expiration date
+		7. we do not collect any personal information
+		8. we do not use cookies or tracking technologies
+		9. we do not log any user activity</p>
+</details>
+
+by <a href="https://snehasish.xyz" target="_blank">snehasish</a>
+mail@snehasish.xyz / discord: @snehasish / instagram: @snehasish
+x: @snehasishcodes / github: @snehasishcodes
+sponsor me: <a href="https://buymeacoffee.com/snehasish">buymeacoffee.com/snehasish</a> / upi: snehasishlol@fam
+</body>
+
+</html>
