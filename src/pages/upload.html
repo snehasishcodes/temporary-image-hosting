@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload to gurt.party</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Source Code Pro", monospace;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        div {
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="file"] {
+            padding: 0;
+            border: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Upload to gurt.party</h2>
+    <p>Temporary File Hosting Service</p>
+
+    <br><br>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="file">Select Image:</label>
+            <input type="file" accept=".png, .jpg, .jpeg, .webp, .gif, image/png, image/jpeg, image/webp, image/gif"
+                id="file" name="file" required>
+            <label for="file">Max 5MB per image : .png, .jpg, .jpeg, .webp, .gif</label>
+        </div>
+        <br>
+        <div>
+            <label for="expires_in">Expires In</label>
+            <input type="text" name="expires_in" id="expires_in" placeholder="6d, 12h 10m, 2 days 17 hours, etc."
+                required>
+            <label for="expires_in">Max 7 days</label>
+        </div>
+        <br>
+        <div>
+            <label for="title">Title (optional)</label>
+            <input type="text" name="title" id="title" maxlength="100">
+        </div>
+        <br><br>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+
+</html>
