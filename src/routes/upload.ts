@@ -4,6 +4,8 @@ import path from "path";
 import fs from "fs/promises";
 import parseDuration from "ms";
 import upload from "../lib/upload";
+import uploadRateLimit from "../middleware/upload-rate-limit";
+import { incrementStat, incrementStatFloat, incrementStatFloatWithExpiry, incrementStatWithExpiry } from "../redis/stats.store";
 
 const router = express.Router();
 const multer = Multer({
@@ -26,6 +28,7 @@ const multer = Multer({
 
 // POST /upload
 router.post("/upload",
+    uploadRateLimit, // rate limit middleware
 
     multer.single("file"),
 
@@ -64,13 +67,18 @@ router.post("/upload",
 
         try {
             const doc = await upload(filePath, expiresAt, title);
+            // update stats in redis store
+            await incrementStat("total_uploads");
+            await incrementStatFloat("total_uploads_size", req.file.size);
+            await incrementStatWithExpiry("uploads_today", 86400); // 1 day expiry
+            await incrementStatFloatWithExpiry("uploads_size_today", req.file.size, 86400); // 1 day expiry
             await fs.unlink(filePath);
 
             res
                 .status(201)
                 .json({
                     id: doc._id,
-                    url: `${req.protocol}://${req.hostname}/${doc._id}`,
+                    url: `https://${req.hostname}/${doc._id}`,
                     expires_at: expiresAt
                 });
 

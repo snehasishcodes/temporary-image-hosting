@@ -11,6 +11,7 @@ import routes from "./routes";
 
 const app = express();
 
+app.set("trust proxy", true);
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());

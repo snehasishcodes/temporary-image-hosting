@@ -34,7 +34,7 @@ router.post("/cron", async (req, res) => {
 
             if (assetId) {
                 try {
-                    // console.log(`Deleting asset: ${assetId}`);
+                    console.log(`Deleting asset: ${assetId}`);
                     await sanity.delete(assetId);
                 } catch (err) {
                     console.error(`Failed to delete asset ${assetId}:`, err);
@@ -43,13 +43,16 @@ router.post("/cron", async (req, res) => {
 
             try {
                 await sanity.delete(docId);
-                // console.log(`Deleted document: ${docId}`);
+                console.log(`Deleted document: ${docId}`);
             } catch (err) {
                 console.error(`Failed to delete document ${docId}:`, err);
             }
         }
 
-        res.status(200).json({ message: "Expired tempImage documents deleted successfully" });
+        res.status(200).json({
+            message: "Expired tempImage documents deleted successfully",
+            count: expiredDocs.length,
+        });
     } catch (err) {
         console.error(err);
         res.status(500).send("Server error");
